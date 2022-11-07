@@ -1,8 +1,0 @@
-package kodlama.io.kodlama.io.Devs.webApi.controllers;
-
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class ProgrammingLanguagesController {
-
-}

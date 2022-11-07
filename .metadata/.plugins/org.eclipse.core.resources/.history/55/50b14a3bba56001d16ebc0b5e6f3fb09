@@ -1,7 +1,0 @@
-package kodlama.io.kodlama.io.Devs.business.concretes;
-
-import kodlama.io.kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
-
-public class ProgrammingLanguageManager implements ProgrammingLanguageService {
-
-}

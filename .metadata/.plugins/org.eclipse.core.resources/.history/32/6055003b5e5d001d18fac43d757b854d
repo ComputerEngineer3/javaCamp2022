@@ -1,0 +1,55 @@
+package kodlama.io.kodlama.io.Devs.business.concretes;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.kodlama.io.Devs.business.abstracts.TechnologyService;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.CreateTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.DeleteTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.UpdateTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.responses.technologyResponses.GetAllTechnologiesResponse;
+import kodlama.io.kodlama.io.Devs.business.responses.technologyResponses.GetByIdTechnologyResponse;
+import kodlama.io.kodlama.io.Devs.dataAccess.abstracts.TechnologyRepository;
+
+@Service
+public class TechnologyManager implements TechnologyService {
+	private TechnologyRepository technologyRepository;
+	
+	@Autowired
+	public TechnologyManager(TechnologyRepository technologyRepository) {
+		this.technologyRepository = technologyRepository;
+	}
+
+	@Override
+	public void add(CreateTechnologyRequest createTechnologyRequest) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(DeleteTechnologyRequest deleteTechnologyRequest) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(UpdateTechnologyRequest updateTechnologyRequest) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<GetAllTechnologiesResponse> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GetByIdTechnologyResponse getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

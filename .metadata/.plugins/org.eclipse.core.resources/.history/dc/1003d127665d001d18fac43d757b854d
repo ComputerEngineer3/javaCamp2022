@@ -1,0 +1,115 @@
+package kodlama.io.kodlama.io.Devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.kodlama.io.Devs.business.abstracts.TechnologyService;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.CreateTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.DeleteTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.technologyRequests.UpdateTechnologyRequest;
+import kodlama.io.kodlama.io.Devs.business.responses.programmingLanguageResponses.GetAllProgrammingLanguagesResponse;
+import kodlama.io.kodlama.io.Devs.business.responses.technologyResponses.GetAllTechnologiesResponse;
+import kodlama.io.kodlama.io.Devs.business.responses.technologyResponses.GetByIdTechnologyResponse;
+import kodlama.io.kodlama.io.Devs.dataAccess.abstracts.TechnologyRepository;
+import kodlama.io.kodlama.io.Devs.entities.concretes.Technology;
+
+@Service
+public class TechnologyManager implements TechnologyService {
+	private TechnologyRepository technologyRepository;
+	
+	@Autowired
+	public TechnologyManager(TechnologyRepository technologyRepository) {
+		this.technologyRepository = technologyRepository;
+	}
+
+	@Override
+	public void add(CreateTechnologyRequest createTechnologyRequest) throws Exception {
+		
+		Technology technology = new Technology();
+		technology.setProgrammingLanguageId(createTechnologyRequest.getProgrammingLanguageId());
+		technology.setName(createTechnologyRequest.getName());
+		
+		List<Technology> technologies = technologyRepository.findAll();
+		
+		for (Technology t : technologies) {
+			if (t.getName().equals(technology.getName())) {
+				throw new Exception("İsimler tekrar edemez.");
+			}
+		}
+		
+		if (technology.getName().isEmpty()) {
+			throw new Exception("Teknoloji ismi boş geçilemez.");
+		}
+		
+		this.technologyRepository.save(technology);
+	}
+
+	@Override
+	public void delete(DeleteTechnologyRequest deleteTechnologyRequest) {
+		Technology technology = new Technology();
+		technology.setId(deleteTechnologyRequest.getId());
+		
+		technologyRepository.delete(technology);
+	}
+
+	@Override
+	public void update(UpdateTechnologyRequest updateTechnologyRequest) throws Exception {
+		
+		Technology technology = new Technology();
+		technology.setId(updateTechnologyRequest.getId());
+		technology.setProgrammingLanguageId(updateTechnologyRequest.getProgrammingLanguageId());
+		technology.setName(updateTechnologyRequest.getName());
+		
+		List<Technology> technologies = technologyRepository.findAll();
+		
+		for (Technology t : technologies) {
+			if (t.getName().equals(technology.getName())) {
+				throw new Exception("İsimler tekrar edemez.");
+			}
+		}
+		
+		if (technology.getName().isEmpty()) {
+			throw new Exception("Teknoloji ismi boş geçilemez.");
+		}
+		
+		Technology updatedTechnology = technologyRepository.getReferenceById(technology.getId());
+		updatedTechnology.setProgrammingLanguageId(technology.getProgrammingLanguageId());
+		updatedTechnology.setName(technology.getName());
+		technologyRepository.save(updatedTechnology);
+	}
+
+	@Override
+	public List<GetAllTechnologiesResponse> getAll() {
+		
+		List<Technology> technologies = technologyRepository.findAll();
+		List<GetAllTechnologiesResponse> technologiesResponse = new ArrayList<GetAllTechnologiesResponse>();
+		
+		for (Technology technology : technologies) {
+			GetAllTechnologiesResponse responseItem = new GetAllTechnologiesResponse();
+			responseItem.setId(technology.getId());
+			responseItem.setProgrammingLanguageId(technology.getProgrammingLanguageId());
+			responseItem.setName(technology.getName());
+			
+			technologiesResponse.add(responseItem);
+		}
+		
+		return technologiesResponse;
+	}
+
+	@Override
+	public GetByIdTechnologyResponse getById(int id) {
+		
+		Technology technology = technologyRepository.getReferenceById(id);
+		
+		GetByIdTechnologyResponse technologyResponse = new GetByIdTechnologyResponse();
+		technologyResponse.setId(technology.getId());
+		technologyResponse.setProgrammingLanguageId(technology.getProgrammingLanguageId());
+		technologyResponse.setName(technology.getName());
+		
+		return null;
+	}
+
+}

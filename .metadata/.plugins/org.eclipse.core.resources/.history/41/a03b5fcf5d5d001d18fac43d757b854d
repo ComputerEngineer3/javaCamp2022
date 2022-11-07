@@ -1,0 +1,8 @@
+package kodlama.io.kodlama.io.Devs.business.concretes;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TechnologyManager {
+
+}

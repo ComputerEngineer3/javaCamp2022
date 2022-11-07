@@ -1,0 +1,55 @@
+package kodlama.io.kodlama.io.Devs.webApi.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import kodlama.io.kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
+import kodlama.io.kodlama.io.Devs.business.requests.programmingLanguageRequests.CreateProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.programmingLanguageRequests.DeleteProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.requests.programmingLanguageRequests.UpdateProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.responses.programmingLanguageResponses.GetAllProgrammingLanguagesResponse;
+import kodlama.io.kodlama.io.Devs.business.responses.programmingLanguageResponses.GetByIdProgrammingLanguageResponse;
+
+@RestController
+@RequestMapping("/api/programminglanguages")
+public class ProgrammingLanguagesController {
+	private ProgrammingLanguageService programmingLanguageService;
+
+	@Autowired
+	public ProgrammingLanguagesController(ProgrammingLanguageService programmingLanguageService) {
+		this.programmingLanguageService = programmingLanguageService;
+	}
+	
+	@PostMapping("/add")
+	public List<GetAllProgrammingLanguagesResponse> add(CreateProgrammingLanguageRequest createProgrammingLanguageRequest) throws Exception{
+		this.programmingLanguageService.add(createProgrammingLanguageRequest);
+		return programmingLanguageService.getAll();
+	}
+	
+	@PostMapping("/delete")
+	public List<GetAllProgrammingLanguagesResponse> delete(DeleteProgrammingLanguageRequest deleteProgrammingLanguageRequest) {
+		programmingLanguageService.delete(deleteProgrammingLanguageRequest);
+		return programmingLanguageService.getAll();
+	}
+	
+	@PostMapping("/update")
+	public List<GetAllProgrammingLanguagesResponse> update(UpdateProgrammingLanguageRequest updateProgrammingLanguageRequest) throws Exception{
+		programmingLanguageService.update(updateProgrammingLanguageRequest);
+		return programmingLanguageService.getAll();
+	}
+	
+	@GetMapping("/getall")
+	public List<GetAllProgrammingLanguagesResponse> getAll(){
+		return programmingLanguageService.getAll();
+	}
+	
+	@GetMapping("/getbyid")
+	public GetByIdProgrammingLanguageResponse getById(int id){
+		return programmingLanguageService.getById(id);
+	}
+}

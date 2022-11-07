@@ -1,0 +1,10 @@
+package kodlama.io.kodlama.io.Devs.business.requests;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class UpdateProgrammingLanguageRequest {
+
+}

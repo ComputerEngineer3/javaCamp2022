@@ -1,0 +1,26 @@
+package kodlama.io.kodlama.io.Devs.entities.concretes;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Table(name="technologies")
+@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class Technology {
+	
+	private int id;
+	
+	private int programmingLanguageId;
+	
+	private String name;
+}
